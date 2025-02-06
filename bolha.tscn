@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1i7sikudnx6j"]
+
+[ext_resource type="Script" path="res://bolha.gd" id="1_s60oq"]
+[ext_resource type="Texture2D" uid="uid://b1315q17k3xyd" path="res://Assets/Remake/Bubble_01.png" id="2_rt1e3"]
+[ext_resource type="Texture2D" uid="uid://dlu35hfeaodrn" path="res://Assets/Remake/Bubble_02.png" id="3_0peyy"]
+[ext_resource type="Texture2D" uid="uid://cyxcoq8alu84" path="res://Assets/Remake/Bubble_03.png" id="4_g8avi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y5of1"]
+radius = 4.12311
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ichpb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rt1e3")
+}],
+"loop": false,
+"name": &"Bolha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rt1e3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0peyy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g8avi")
+}],
+"loop": false,
+"name": &"Pegou",
+"speed": 5.0
+}]
+
+[node name="Bolha" type="Node2D"]
+light_mask = 2
+visibility_layer = 2
+script = ExtResource("1_s60oq")
+
+[node name="Area2D" type="Area2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_y5of1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+sprite_frames = SubResource("SpriteFrames_ichpb")
+animation = &"Bolha"
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 14.5
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

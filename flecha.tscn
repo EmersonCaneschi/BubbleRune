@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://btdmrhv2wkqby"]
+
+[ext_resource type="Script" path="res://flecha.gd" id="1_c5f1l"]
+[ext_resource type="Texture2D" uid="uid://cw65034gfa5m" path="res://Assets/Remake/Arrow_01.png" id="2_84ns4"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mlsxp"]
+a = Vector2(15.2224, -7.63398)
+b = Vector2(-17.2224, 4.16987)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mmqgf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_84ns4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Flecha" type="Node2D"]
+script = ExtResource("1_c5f1l")
+
+[node name="area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area"]
+position = Vector2(-2, 2)
+rotation = 0.523599
+shape = SubResource("SegmentShape2D_mlsxp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(9.53674e-07, -1.78814e-07)
+rotation = 0.174533
+sprite_frames = SubResource("SpriteFrames_mmqgf")
+frame_progress = 0.0641947

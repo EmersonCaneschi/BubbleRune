@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://btdmrhv2wkqby"]
+
+[ext_resource type="Script" path="res://flecha.gd" id="1_c5f1l"]
+[ext_resource type="Texture2D" uid="uid://dmnqcxcsdau1w" path="res://Assets/Arrow.png" id="2_djgba"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k0rcg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_djgba")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mlsxp"]
+b = Vector2(-10, 0)
+
+[node name="Flecha" type="Area2D"]
+script = ExtResource("1_c5f1l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k0rcg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("SegmentShape2D_mlsxp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

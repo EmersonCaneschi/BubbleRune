@@ -1,0 +1,206 @@
+[gd_scene load_steps=24 format=3 uid="uid://d3rjeynfya558"]
+
+[ext_resource type="Script" path="res://jogo.gd" id="1_uwlsf"]
+[ext_resource type="PackedScene" uid="uid://byp5mh2htwreg" path="res://cenarioJogo.tscn" id="2_ndc5l"]
+[ext_resource type="PackedScene" uid="uid://ce5knsmtofyww" path="res://player.tscn" id="2_v0ykf"]
+[ext_resource type="Texture2D" uid="uid://bog2i11t3rrly" path="res://Assets/Remake/Barra de Vida.png" id="3_pxeu5"]
+[ext_resource type="Texture2D" uid="uid://hm1of84rpbf0" path="res://Assets/Remake/Hand_Anelar.png" id="5_lh36m"]
+[ext_resource type="Texture2D" uid="uid://b08yvfouvo7i" path="res://Assets/Remake/Hand_Indicador.png" id="6_kfl6u"]
+[ext_resource type="Texture2D" uid="uid://dmuy24da3o38v" path="res://Assets/Remake/Hand_Mindinho.png" id="7_75y0c"]
+[ext_resource type="Texture2D" uid="uid://dpkhrqanvdepj" path="res://Assets/Remake/Hand_Medio.png" id="8_c8dg2"]
+[ext_resource type="Texture2D" uid="uid://cpjyopl208pyh" path="res://Assets/Remake/Hand_Polegar.png" id="9_klrhh"]
+[ext_resource type="Texture2D" uid="uid://ccnk8lhx8gmqw" path="res://Assets/Remake/Icon_Bomb_01.png" id="9_utoil"]
+[ext_resource type="Texture2D" uid="uid://dcbyuabe5w73o" path="res://Assets/Remake/Icon_Bubble_01.png" id="10_aa2nn"]
+[ext_resource type="Texture2D" uid="uid://tjc44xe45qqx" path="res://Assets/Remake/Hand_Close.png" id="10_urcgv"]
+[ext_resource type="Texture2D" uid="uid://xsyptelewb5m" path="res://Assets/Remake/Icon_Arrow_01.png" id="10_vm0xq"]
+[ext_resource type="PackedScene" uid="uid://cn5ra6aowwsaa" path="res://som.tscn" id="12_ydq6e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erh4e"]
+atlas = ExtResource("3_pxeu5")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_enq2q"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bly3m"]
+atlas = ExtResource("10_urcgv")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqn6m"]
+atlas = ExtResource("5_lh36m")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nm51m"]
+atlas = ExtResource("6_kfl6u")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s07f8"]
+atlas = ExtResource("7_75y0c")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig1fw"]
+atlas = ExtResource("8_c8dg2")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eslo1"]
+atlas = ExtResource("9_klrhh")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yrkn3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_aa2nn")
+}],
+"loop": true,
+"name": &"Bolha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_utoil")
+}],
+"loop": true,
+"name": &"Bomba",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_vm0xq")
+}],
+"loop": false,
+"name": &"Flecha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_urcgv")
+}],
+"loop": false,
+"name": &"Mao",
+"speed": 5.0
+}]
+
+[node name="Jogo" type="Node2D"]
+script = ExtResource("1_uwlsf")
+
+[node name="Cenario" parent="." instance=ExtResource("2_ndc5l")]
+
+[node name="Player" parent="Cenario" instance=ExtResource("2_v0ykf")]
+position = Vector2(15, 8)
+
+[node name="Barra" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="TextureRect" type="TextureRect" parent="Barra"]
+offset_left = 8.0
+offset_top = 2.0
+offset_right = 108.0
+offset_bottom = 15.0
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_erh4e")
+metadata/_edit_use_anchors_ = true
+
+[node name="Respiração" type="ProgressBar" parent="Barra/TextureRect"]
+modulate = Color(0.0291487, 0.475149, 0.0236941, 1)
+z_index = -1
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_enq2q")
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.417462
+offset_right = 100.0
+offset_bottom = 20.573
+scale = Vector2(0.5, 0.5)
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Maos" type="Node2D" parent="."]
+
+[node name="Mao Fechada" type="TextureRect" parent="Maos"]
+anchors_preset = -1
+anchor_left = 0.195
+anchor_right = 0.342
+anchor_bottom = 0.174
+offset_left = 123.0
+offset_right = 148.0
+offset_bottom = 36.0
+texture = SubResource("AtlasTexture_bly3m")
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Anelar" type="TextureRect" parent="Maos/Mao Fechada"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.222222
+anchor_bottom = 0.277778
+offset_top = -8.0
+offset_right = 25.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_yqn6m")
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Indicador" type="TextureRect" parent="Maos/Mao Fechada"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.277778
+anchor_bottom = 0.277778
+offset_top = -10.0
+offset_right = 25.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_nm51m")
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Mindinho" type="TextureRect" parent="Maos/Mao Fechada"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.111111
+anchor_bottom = 0.277778
+offset_top = -4.0
+offset_right = 25.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_s07f8")
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Médio" type="TextureRect" parent="Maos/Mao Fechada"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.277778
+anchor_bottom = 0.277778
+offset_top = -10.0
+offset_right = 25.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_ig1fw")
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Polegar" type="TextureRect" parent="Maos/Mao Fechada"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.16
+anchor_right = 0.16
+anchor_bottom = 0.277778
+offset_left = -4.0
+offset_right = 25.0
+offset_bottom = 26.0
+texture = SubResource("AtlasTexture_eslo1")
+stretch_mode = 2
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Poderes" type="AnimatedSprite2D" parent="Maos"]
+position = Vector2(168, 18)
+sprite_frames = SubResource("SpriteFrames_yrkn3")
+animation = &"Mao"
+autoplay = "Mao"
+
+[node name="Som" parent="." instance=ExtResource("12_ydq6e")]

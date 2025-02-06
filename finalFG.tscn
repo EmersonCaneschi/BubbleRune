@@ -1,0 +1,111 @@
+[gd_scene load_steps=14 format=3 uid="uid://bgj8hvdmnlyc5"]
+
+[ext_resource type="Script" path="res://finalFG.gd" id="1_qppqb"]
+[ext_resource type="PackedScene" uid="uid://b0pvf2lrxkgqs" path="res://fundo.tscn" id="2_5dr5n"]
+[ext_resource type="Texture2D" uid="uid://bpshvy8je7q6a" path="res://Assets/Remake/Floor_01.png" id="3_gslci"]
+[ext_resource type="Texture2D" uid="uid://difoniril26cd" path="res://Assets/Remake/Hit_02.png" id="4_uih7v"]
+[ext_resource type="Texture2D" uid="uid://bapean151q8p3" path="res://Assets/Remake/Hit_03.png" id="5_0k7c3"]
+[ext_resource type="Texture2D" uid="uid://bijke2hbxk411" path="res://Assets/Remake/Walk_01.png" id="6_ygpsw"]
+[ext_resource type="Texture2D" uid="uid://c54dv34uksfqq" path="res://Assets/Remake/Death_01.png" id="7_2fiy7"]
+[ext_resource type="Texture2D" uid="uid://dsssrvuwtqr13" path="res://Assets/Remake/Death_02.png" id="8_vw0w7"]
+[ext_resource type="Texture2D" uid="uid://tr43hlt2nrjr" path="res://Assets/Remake/Death_03.png" id="9_n8xpl"]
+[ext_resource type="Texture2D" uid="uid://bllx78m1cwc4q" path="res://Assets/Remake/Walk_03.png" id="10_f3be4"]
+[ext_resource type="Texture2D" uid="uid://bsea3d6snunmw" path="res://Assets/Remake/Walk_02.png" id="11_se5ok"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gldfe"]
+atlas = ExtResource("3_gslci")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rhtv3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_uih7v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0k7c3")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ygpsw")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_2fiy7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vw0w7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_n8xpl")
+}],
+"loop": false,
+"name": &"Morreu",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ygpsw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f3be4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_se5ok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f3be4")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 6.0
+}]
+
+[node name="finalF" type="Node2D"]
+script = ExtResource("1_qppqb")
+
+[node name="Fundo" parent="." instance=ExtResource("2_5dr5n")]
+
+[node name="Background4" type="TextureRect" parent="Fundo"]
+z_index = 1
+offset_top = 150.0
+offset_right = 240.0
+offset_bottom = 160.0
+texture = SubResource("AtlasTexture_gldfe")
+
+[node name="AnimatedPlayer" type="AnimatedSprite2D" parent="Fundo"]
+position = Vector2(-13, 130)
+sprite_frames = SubResource("SpriteFrames_rhtv3")
+animation = &"Morreu"
+autoplay = "Walk"
+flip_h = true
+
+[node name="Mensagem" type="Label" parent="."]
+visible = false
+z_index = 1
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 80.0
+offset_right = 600.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_direction = 1

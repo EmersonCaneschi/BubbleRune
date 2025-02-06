@@ -1,0 +1,295 @@
+[gd_scene load_steps=33 format=3 uid="uid://ce5knsmtofyww"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_ypoxr"]
+[ext_resource type="Texture2D" uid="uid://difoniril26cd" path="res://Assets/Remake/Hit_02.png" id="2_ywlgx"]
+[ext_resource type="Texture2D" uid="uid://bapean151q8p3" path="res://Assets/Remake/Hit_03.png" id="3_sg0id"]
+[ext_resource type="Texture2D" uid="uid://bijke2hbxk411" path="res://Assets/Remake/Walk_01.png" id="4_3gql2"]
+[ext_resource type="Texture2D" uid="uid://c54dv34uksfqq" path="res://Assets/Remake/Death_01.png" id="5_raiko"]
+[ext_resource type="Script" path="res://arcano.gd" id="5_tiwnb"]
+[ext_resource type="Texture2D" uid="uid://dsssrvuwtqr13" path="res://Assets/Remake/Death_02.png" id="6_iifka"]
+[ext_resource type="Texture2D" uid="uid://tr43hlt2nrjr" path="res://Assets/Remake/Death_03.png" id="7_0sure"]
+[ext_resource type="Texture2D" uid="uid://bsea3d6snunmw" path="res://Assets/Remake/Walk_02.png" id="8_8nnwe"]
+[ext_resource type="Texture2D" uid="uid://bllx78m1cwc4q" path="res://Assets/Remake/Walk_03.png" id="9_y0msp"]
+[ext_resource type="Texture2D" uid="uid://0t6eljs5m0bu" path="res://Assets/Remake/Rune_01.png" id="11_u283u"]
+[ext_resource type="Texture2D" uid="uid://byjf0wfqalduv" path="res://Assets/Remake/Rune_02.png" id="12_s5eft"]
+[ext_resource type="Texture2D" uid="uid://du41ipxgdfbv2" path="res://Assets/Remake/Rune_15.png" id="13_gxt15"]
+[ext_resource type="Texture2D" uid="uid://dkyrcfjmqtpkv" path="res://Assets/Remake/Rune_03.png" id="13_iy0sv"]
+[ext_resource type="Texture2D" uid="uid://da5g8271vub2l" path="res://Assets/Remake/Rune_04.png" id="14_gnpvi"]
+[ext_resource type="Texture2D" uid="uid://cmg73qwmmk5pt" path="res://Assets/Remake/Rune_05.png" id="15_xqx5h"]
+[ext_resource type="Texture2D" uid="uid://dnwjyf167h4vt" path="res://Assets/Remake/Rune_06.png" id="16_j2bi7"]
+[ext_resource type="Texture2D" uid="uid://b5jb6ekc7qjbs" path="res://Assets/Remake/Rune_07.png" id="17_je1xj"]
+[ext_resource type="Texture2D" uid="uid://dfyreelv4i2xn" path="res://Assets/Remake/Rune_08.png" id="18_3plon"]
+[ext_resource type="Texture2D" uid="uid://cx7lef8ky1fi5" path="res://Assets/Remake/Rune_11.png" id="19_w3t70"]
+[ext_resource type="Texture2D" uid="uid://di1t62v3tyse7" path="res://Assets/Remake/Rune_12.png" id="20_20drv"]
+[ext_resource type="Texture2D" uid="uid://p8dmbfv3ll0l" path="res://Assets/Remake/Rune_09.png" id="21_wghxm"]
+[ext_resource type="Texture2D" uid="uid://cb3cnyj8cjavo" path="res://Assets/Remake/Rune_13.png" id="22_1g4id"]
+[ext_resource type="Texture2D" uid="uid://ltf50vvgvcl8" path="res://Assets/Remake/Rune_10.png" id="23_3cgfu"]
+[ext_resource type="Texture2D" uid="uid://ccagyltiuu1nd" path="res://Assets/Remake/Rune_14.png" id="24_opv3a"]
+[ext_resource type="Texture2D" uid="uid://0u2yic8d1w2w" path="res://Assets/Remake/Rune_EX_01.png" id="25_p85nx"]
+[ext_resource type="Texture2D" uid="uid://cejgwsj2syyv2" path="res://Assets/Remake/Rune_EX_02.png" id="26_myd0s"]
+[ext_resource type="AudioStream" uid="uid://dkrsxkhk2tkg4" path="res://Assets/Remake/Som Branco.mp3" id="27_5of3h"]
+[ext_resource type="AudioStream" uid="uid://b647cck7ak18x" path="res://Assets/Remake/Som Preto.mp3" id="28_prg2j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pvtg1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ywlgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sg0id")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3gql2")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_raiko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_iifka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0sure")
+}],
+"loop": false,
+"name": &"Morreu",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3gql2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_y0msp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8nnwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_y0msp")
+}],
+"loop": false,
+"name": &"Walk",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iceic"]
+size = Vector2(23, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q6ftd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_u283u")
+}],
+"loop": true,
+"name": &"11",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_s5eft")
+}],
+"loop": true,
+"name": &"12",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_gxt15")
+}],
+"loop": true,
+"name": &"15",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_iy0sv")
+}],
+"loop": true,
+"name": &"21",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_gnpvi")
+}],
+"loop": true,
+"name": &"22",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_xqx5h")
+}],
+"loop": true,
+"name": &"23",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_j2bi7")
+}],
+"loop": true,
+"name": &"24",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_je1xj")
+}],
+"loop": true,
+"name": &"25",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_3plon")
+}],
+"loop": true,
+"name": &"31",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_w3t70")
+}],
+"loop": true,
+"name": &"32",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_20drv")
+}],
+"loop": true,
+"name": &"43",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_wghxm")
+}],
+"loop": true,
+"name": &"44",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_1g4id")
+}],
+"loop": true,
+"name": &"52",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_3cgfu")
+}],
+"loop": true,
+"name": &"53",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_opv3a")
+}],
+"loop": true,
+"name": &"54",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_p85nx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_myd0s")
+}],
+"loop": false,
+"name": &"Some",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_myd0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_p85nx")
+}],
+"loop": false,
+"name": &"Surge",
+"speed": 3.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+light_mask = 3
+visibility_layer = 3
+script = ExtResource("1_ypoxr")
+
+[node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
+position = Vector2(11, 121)
+sprite_frames = SubResource("SpriteFrames_pvtg1")
+animation = &"Walk"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11.5, 121)
+shape = SubResource("RectangleShape2D_iceic")
+
+[node name="Arcano" type="Node" parent="."]
+script = ExtResource("5_tiwnb")
+
+[node name="Runas" type="AnimatedSprite2D" parent="Arcano"]
+visible = false
+position = Vector2(17, 96)
+scale = Vector2(1, 1.236)
+sprite_frames = SubResource("SpriteFrames_q6ftd")
+animation = &"15"
+
+[node name="Contator" type="Timer" parent="Arcano"]
+
+[node name="Branco" type="AudioStreamPlayer2D" parent="Arcano"]
+stream = ExtResource("27_5of3h")
+
+[node name="Preto" type="AudioStreamPlayer2D" parent="Arcano"]
+stream = ExtResource("28_prg2j")
+
+[node name="ContaSino" type="Timer" parent="Arcano"]
+wait_time = 2.0
+
+[node name="Mensagem" type="Label" parent="Arcano"]
+visible = false
+z_index = 1
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = 58.0
+offset_right = 96.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+text = "Melhor pontuação:"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_direction = 1
+
+[connection signal="timeout" from="Arcano/Contator" to="Arcano" method="_on_contator_timeout"]
+[connection signal="timeout" from="Arcano/ContaSino" to="Arcano" method="_on_conta_sino_timeout"]

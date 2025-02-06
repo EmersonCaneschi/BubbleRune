@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://28hhpf7s2ncq"]
+
+[ext_resource type="Script" path="res://bolha_gigante.gd" id="1_cpqp8"]
+[ext_resource type="Texture2D" uid="uid://c1iw0suwx1o4m" path="res://Assets/Remake/Big_Bubble_01.png" id="2_ywg2j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fko2w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ywg2j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gbte8"]
+radius = 34.5254
+
+[node name="BolhaGigante" type="Node2D"]
+script = ExtResource("1_cpqp8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4.76837e-07, 9.53674e-07)
+scale = Vector2(1.18852, 1.19492)
+sprite_frames = SubResource("SpriteFrames_fko2w")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gbte8")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

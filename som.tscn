@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn5ra6aowwsaa"]
+
+[ext_resource type="AudioStream" uid="uid://qjdexol4i16a" path="res://Assets/Remake/I Heard a Sound.mp3" id="1_g6w6u"]
+[ext_resource type="Script" path="res://som.gd" id="1_lyx6i"]
+
+[node name="Som" type="Node2D"]
+script = ExtResource("1_lyx6i")
+
+[node name="arcanoDesperta" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_g6w6u")

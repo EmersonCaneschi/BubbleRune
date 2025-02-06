@@ -1,0 +1,123 @@
+[gd_scene load_steps=16 format=3 uid="uid://byp5mh2htwreg"]
+
+[ext_resource type="Script" path="res://cenario.gd" id="1_eh8ad"]
+[ext_resource type="Texture2D" uid="uid://cdwc6liycyt43" path="res://Assets/Remake/Sky_01.png" id="2_2uot6"]
+[ext_resource type="Texture2D" uid="uid://bpshvy8je7q6a" path="res://Assets/Remake/Floor_01.png" id="3_i4lib"]
+[ext_resource type="Texture2D" uid="uid://bycnrll5p3ki3" path="res://Assets/Remake/Pillar_01.png" id="4_38ktd"]
+[ext_resource type="Texture2D" uid="uid://x1ig1mik87lk" path="res://Assets/Remake/Pillar_02.png" id="5_upyr7"]
+[ext_resource type="Texture2D" uid="uid://nppy6a6wwmb4" path="res://Assets/Remake/Pillar_03.png" id="6_vfcu3"]
+[ext_resource type="Texture2D" uid="uid://bdh30ix82no2l" path="res://Assets/Remake/Pillar_04.png" id="7_wim5d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sk3eb"]
+size = Vector2(21, 132.5)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4lyii"]
+a = Vector2(24, 0)
+b = Vector2(-5, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xk2ra"]
+size = Vector2(26, 58.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe5fr"]
+atlas = ExtResource("2_2uot6")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8rsoq"]
+load_path = "res://.godot/imported/Background_01.png-94f6bb11b3e8135074c12d2a95ef4a6c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipsig"]
+atlas = SubResource("CompressedTexture2D_8rsoq")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jnx8"]
+atlas = ExtResource("3_i4lib")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6kb4i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_38ktd")
+}],
+"loop": true,
+"name": &"Q1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_upyr7")
+}],
+"loop": true,
+"name": &"Q2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_vfcu3")
+}],
+"loop": true,
+"name": &"Q3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wim5d")
+}],
+"loop": true,
+"name": &"Q4",
+"speed": 5.0
+}]
+
+[node name="Cenario" type="CanvasLayer"]
+layer = -1
+script = ExtResource("1_eh8ad")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(262, 13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-34, 68)
+shape = SubResource("RectangleShape2D_sk3eb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-47, 126)
+shape = SubResource("SegmentShape2D_4lyii")
+
+[node name="Area2D" type="Area2D" parent="StaticBody2D"]
+position = Vector2(185, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
+position = Vector2(41, 115.25)
+shape = SubResource("RectangleShape2D_xk2ra")
+
+[node name="Alcance" type="RayCast2D" parent="."]
+position = Vector2(147, 128)
+target_position = Vector2(-14, 1)
+
+[node name="GeraBolha" type="Timer" parent="."]
+autostart = true
+
+[node name="Background1" type="TextureRect" parent="."]
+offset_right = 160.0
+offset_bottom = 144.0
+texture = SubResource("AtlasTexture_oe5fr")
+
+[node name="Background2" type="TextureRect" parent="."]
+offset_top = 87.0
+offset_right = 240.0
+offset_bottom = 160.0
+texture = SubResource("AtlasTexture_ipsig")
+
+[node name="Background3" type="TextureRect" parent="."]
+offset_top = 147.0
+offset_right = 240.0
+offset_bottom = 160.0
+texture = SubResource("AtlasTexture_5jnx8")
+
+[node name="Barragem" type="AnimatedSprite2D" parent="."]
+position = Vector2(224, 82)
+scale = Vector2(0.76503, 0.92069)
+sprite_frames = SubResource("SpriteFrames_6kb4i")
+animation = &"Q4"
+autoplay = "Q1"
+
+[connection signal="area_entered" from="StaticBody2D/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="StaticBody2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="GeraBolha" to="." method="_on_timer_timeout"]

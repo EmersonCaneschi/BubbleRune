@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw263c4irk3ul"]
+
+[ext_resource type="Texture2D" uid="uid://b1rnu2xim6jph" path="res://Assets/Remake/Cutscene_01.png" id="1_56lvr"]
+[ext_resource type="Texture2D" uid="uid://c1iw0suwx1o4m" path="res://Assets/Remake/Big_Bubble_01.png" id="1_py4dn"]
+[ext_resource type="Script" path="res://menu.gd" id="1_xg643"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43hok"]
+atlas = ExtResource("1_56lvr")
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_xg643")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 239.0
+offset_bottom = 209.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Iniciar"
+icon = ExtResource("1_py4dn")
+flat = true
+icon_alignment = 1
+
+[node name="About" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Sobre"
+icon = ExtResource("1_py4dn")
+flat = true
+icon_alignment = 1
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Sair"
+icon = ExtResource("1_py4dn")
+flat = true
+icon_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 240.0
+offset_bottom = 160.0
+texture = SubResource("AtlasTexture_43hok")

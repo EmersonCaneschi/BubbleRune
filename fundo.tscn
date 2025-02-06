@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://b0pvf2lrxkgqs"]
+
+[ext_resource type="Texture2D" uid="uid://cdwc6liycyt43" path="res://Assets/Remake/Sky_01.png" id="1_m1g21"]
+[ext_resource type="Texture2D" uid="uid://cosej3u1yqgow" path="res://Assets/Remake/Water_01.png" id="2_6tc3t"]
+[ext_resource type="Texture2D" uid="uid://cadc5jpw58s0l" path="res://Assets/Remake/Water_02.png" id="3_oowfy"]
+[ext_resource type="Texture2D" uid="uid://bln5nufqyh7so" path="res://Assets/Remake/Water_03.png" id="4_0gar3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7wnk"]
+atlas = ExtResource("1_m1g21")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8rsoq"]
+load_path = "res://.godot/imported/Background_01.png-94f6bb11b3e8135074c12d2a95ef4a6c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipsig"]
+atlas = SubResource("CompressedTexture2D_8rsoq")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_afbfr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6tc3t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_oowfy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0gar3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6tc3t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_oowfy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0gar3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_oowfy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="Fundo" type="Node2D"]
+
+[node name="Background1" type="TextureRect" parent="."]
+offset_right = 240.0
+offset_bottom = 160.0
+texture = SubResource("AtlasTexture_i7wnk")
+
+[node name="Background2" type="TextureRect" parent="."]
+offset_top = 87.0
+offset_right = 240.0
+offset_bottom = 160.0
+texture = SubResource("AtlasTexture_ipsig")
+
+[node name="Agua" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.784314)
+z_index = 1
+position = Vector2(120, 87.5)
+sprite_frames = SubResource("SpriteFrames_afbfr")
+autoplay = "default"
+frame_progress = 0.416264
+flip_h = true

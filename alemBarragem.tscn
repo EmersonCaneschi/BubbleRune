@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6thcgm6qx5la"]
+
+[ext_resource type="Script" path="res://alemBarragem.gd" id="1_msyb0"]
+
+[node name="alemBarragem" type="Node2D"]
+script = ExtResource("1_msyb0")
+
+[node name="Temporario" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Final A ou C"

@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbot8x66riiby"]
+
+[ext_resource type="Script" path="res://cenaAbertura.gd" id="1_suhis"]
+[ext_resource type="Texture2D" uid="uid://dxbdairr8tx0w" path="res://Assets/Remake/Sky_02.png" id="2_ynos0"]
+[ext_resource type="Texture2D" uid="uid://rmt3p2kv2uv" path="res://Assets/Remake/Airplane_01.png" id="3_oyaat"]
+[ext_resource type="Texture2D" uid="uid://5iupwwwohpfi" path="res://Assets/Remake/Airplane_02.png" id="4_23hj4"]
+[ext_resource type="Texture2D" uid="uid://diotyhko31we6" path="res://Assets/Remake/Ponto.png" id="5_p87j6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe5fr"]
+atlas = ExtResource("2_ynos0")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ypukc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_23hj4")
+}],
+"loop": true,
+"name": &"aberto",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_oyaat")
+}],
+"loop": true,
+"name": &"fechado",
+"speed": 5.0
+}]
+
+[node name="CenaAbertura" type="Node2D"]
+script = ExtResource("1_suhis")
+
+[node name="Fundo" type="Node2D" parent="."]
+
+[node name="Background1" type="TextureRect" parent="Fundo"]
+offset_right = 241.0
+offset_bottom = 160.0
+texture = SubResource("AtlasTexture_oe5fr")
+
+[node name="Aviao" type="AnimatedSprite2D" parent="Fundo"]
+position = Vector2(-18, 61)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ypukc")
+animation = &"fechado"
+autoplay = "fechado"
+flip_h = true
+
+[node name="Mensagem" type="Label" parent="."]
+visible = false
+z_index = 1
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 137.0
+offset_right = 600.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_direction = 1
+
+[node name="Plinio" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+texture = ExtResource("5_p87j6")

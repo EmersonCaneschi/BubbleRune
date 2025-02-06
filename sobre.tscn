@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxvbpdf8hv3ph"]
+
+[ext_resource type="PackedScene" uid="uid://b0pvf2lrxkgqs" path="res://fundo.tscn" id="1_bi2xv"]
+[ext_resource type="Script" path="res://sobre.gd" id="1_bwa8v"]
+[ext_resource type="Texture2D" uid="uid://c1iw0suwx1o4m" path="res://Assets/Remake/Big_Bubble_01.png" id="3_cdqhw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f4ng4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cdqhw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Sobre" type="Node2D"]
+script = ExtResource("1_bwa8v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Fundo" parent="CanvasLayer" instance=ExtResource("1_bi2xv")]
+
+[node name="bolha" type="AnimatedSprite2D" parent="CanvasLayer"]
+z_index = 1
+position = Vector2(120, 80)
+scale = Vector2(2.83607, 2.01)
+sprite_frames = SubResource("SpriteFrames_f4ng4")
+
+[node name="Quit" type="Button" parent="CanvasLayer"]
+z_index = 1
+offset_left = 195.0
+offset_top = 117.0
+offset_right = 264.0
+offset_bottom = 184.0
+scale = Vector2(0.65, 0.65)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "Voltar"
+icon = ExtResource("3_cdqhw")
+flat = true
+icon_alignment = 1
+
+[node name="Info" type="Label" parent="CanvasLayer"]
+z_index = 1
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -37.0
+offset_right = 288.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_direction = 1
+
+[connection signal="pressed" from="CanvasLayer/Quit" to="." method="_on_quit_pressed"]
