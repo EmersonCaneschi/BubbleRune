@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d3rjeynfya558"]
+[gd_scene load_steps=23 format=3 uid="uid://d3rjeynfya558"]
 
 [ext_resource type="Script" path="res://jogo.gd" id="1_uwlsf"]
 [ext_resource type="PackedScene" uid="uid://byp5mh2htwreg" path="res://cenarioJogo.tscn" id="2_ndc5l"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://dcbyuabe5w73o" path="res://Assets/Remake/Icon_Bubble_01.png" id="10_aa2nn"]
 [ext_resource type="Texture2D" uid="uid://tjc44xe45qqx" path="res://Assets/Remake/Hand_Close.png" id="10_urcgv"]
 [ext_resource type="Texture2D" uid="uid://xsyptelewb5m" path="res://Assets/Remake/Icon_Arrow_01.png" id="10_vm0xq"]
-[ext_resource type="PackedScene" uid="uid://cn5ra6aowwsaa" path="res://som.tscn" id="12_ydq6e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_erh4e"]
 atlas = ExtResource("3_pxeu5")
@@ -89,6 +88,7 @@ position = Vector2(15, 8)
 scale = Vector2(0.5, 0.5)
 
 [node name="TextureRect" type="TextureRect" parent="Barra"]
+z_index = 2
 offset_left = 8.0
 offset_top = 2.0
 offset_right = 108.0
@@ -99,14 +99,16 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Respiração" type="ProgressBar" parent="Barra/TextureRect"]
 modulate = Color(0.0291487, 0.475149, 0.0236941, 1)
-z_index = -1
+z_index = 1
 texture_filter = 1
 material = SubResource("CanvasItemMaterial_enq2q")
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.417462
+anchor_left = 0.02
+anchor_top = 0.0769231
+anchor_right = 0.94
+anchor_bottom = 0.186692
 offset_right = 100.0
 offset_bottom = 20.573
 scale = Vector2(0.5, 0.5)
@@ -119,6 +121,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Maos" type="Node2D" parent="."]
 
 [node name="Mao Fechada" type="TextureRect" parent="Maos"]
+z_index = 1
 anchors_preset = -1
 anchor_left = 0.195
 anchor_right = 0.342
@@ -132,6 +135,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Anelar" type="TextureRect" parent="Maos/Mao Fechada"]
 visible = false
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.222222
@@ -145,6 +149,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Indicador" type="TextureRect" parent="Maos/Mao Fechada"]
 visible = false
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.277778
@@ -158,6 +163,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Mindinho" type="TextureRect" parent="Maos/Mao Fechada"]
 visible = false
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.111111
@@ -171,6 +177,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Médio" type="TextureRect" parent="Maos/Mao Fechada"]
 visible = false
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.277778
@@ -184,6 +191,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Polegar" type="TextureRect" parent="Maos/Mao Fechada"]
 visible = false
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.16
@@ -198,9 +206,8 @@ flip_h = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Poderes" type="AnimatedSprite2D" parent="Maos"]
+z_index = 1
 position = Vector2(168, 18)
 sprite_frames = SubResource("SpriteFrames_yrkn3")
 animation = &"Mao"
 autoplay = "Mao"
-
-[node name="Som" parent="." instance=ExtResource("12_ydq6e")]

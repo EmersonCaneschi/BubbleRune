@@ -1,10 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn5ra6aowwsaa"]
+[gd_scene load_steps=3 format=3 uid="uid://brdvf8g68c8eu"]
 
 [ext_resource type="AudioStream" uid="uid://qjdexol4i16a" path="res://Assets/Remake/I Heard a Sound.mp3" id="1_g6w6u"]
-[ext_resource type="Script" path="res://som.gd" id="1_lyx6i"]
+
+[sub_resource type="GDScript" id="GDScript_6w67l"]
+script/source = "extends Node2D
+
+@onready var som: Node2D = $\".\"
+
+var flagArcanoDesperta: bool = 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+	
+func lista(numero: int):
+	if numero == 1:
+		som.get_node(\"./arcanoDesperta\").play()
+"
 
 [node name="Som" type="Node2D"]
-script = ExtResource("1_lyx6i")
+script = SubResource("GDScript_6w67l")
 
 [node name="arcanoDesperta" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_g6w6u")

@@ -1,17 +1,15 @@
 extends CharacterBody2D
 
 var respiracao: int = 5000
-@onready var cenario: CanvasLayer = $".."
+@onready var cenario: Node2D = $".."
 @onready var barra: ProgressBar = $"../../Barra/TextureRect/Respiração"
 @onready var sprite: AnimatedSprite2D = $AnimatedPlayer
 @onready var player: CharacterBody2D = $"."
 @onready var arcano: Node = $Arcano
 
-var flagSound: bool = false
 var flagArrow: bool = false
 var flagBomb: bool = false
 var flagBubble: bool = false
-var flagBulletProof: bool = false
 var bolhasPegas: int = 0
 
 const SPEED = 100.0
@@ -34,6 +32,8 @@ func _physics_process(delta: float) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	barra.max_value = respiracao
+	Som.flagMorreu = false
+	Global.flagBulletProof = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -58,6 +58,9 @@ func verificaFlags():
 		await sprite.animation_finished
 		
 func morreu():
+	if !Som.flagMorreu:
+		Som.playAudio("Morreu")
+		Som.flagMorreu = true
 	sprite.play("Morreu")
 	if Global.score > Global.highScore:
 		Global.highScore = Global.score
@@ -65,7 +68,7 @@ func morreu():
 	get_node("../..").fimJogo()   #Troca de cena para voltar ao menu
 
 # Método para aumentar a respiração do jogador
-func aumentar_respiração(valor: int) -> void:
+func aumentarRespiração(valor: int) -> void:
 	bolhasPegas += 1
 	respiracao += (valor - bolhasPegas)
 	barra.value = respiracao  # Atualiza a barra de respiração

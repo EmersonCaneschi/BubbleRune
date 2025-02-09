@@ -22,6 +22,7 @@ func _on_timer_timeout() -> void:
 	if rayCast.is_colliding() and rayCast.get_collider() != null:
 		if str(rayCast.get_collider().name) == "Player":
 			alcance = true
+	Som.playAudio("Explosão")
 	await sprite.animation_finished
 	get_node("..").bombaCenario = 0
 	queue_free()

@@ -5,6 +5,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	position = player.position + Vector2(0, 80 + player.position.x/9)
+	Som.playAudio("Flecha")
 	if player.position.x < 3:
 		rotation = 0.2
 	else:

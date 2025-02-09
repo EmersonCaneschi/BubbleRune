@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node2D
 
 @onready var player: CharacterBody2D = $"Player"
 @onready var aguaSprite: AnimatedSprite2D = $"Fundo/Agua"
@@ -8,41 +8,45 @@ extends CanvasLayer
 @onready var flecha = preload("res://flecha.tscn")
 @onready var bomba = preload("res://bomba.tscn")
 @onready var bolhaGigante = preload("res://bolha_gigante.tscn")
-@onready var som: Node2D = $"../Som"
 var rng = RandomNumberGenerator.new()
 
 var bombaCenario: bool = false
 var bolhaGiganteCenario: bool = false
 var agua: bool = 1 #Se a água está presente ou não
-var torreVida: int = 10000
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var torreVida: int = 12000
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	verificaBarragem()
-	if agua == false:
+	if !agua:
 		aguaSprite.position.y += 1
 		
-	if player.position.x < -25:
-		Global.flagRotaF = true
+	if player.position.x < -20:
 		if !agua:
 			Global.flagRotaG = true
+		else:
+			Global.flagRotaF = true
 		
 func verificaBarragem():
 	if alcance.is_colliding():
 		verificaDano()
 		
-	if torreVida >= 8000:
+	if torreVida >= 10000:
 		barragem.play("Q1")
 	elif torreVida >= 5000:
 		barragem.play("Q2")
-		player.flagSound = true
 		Global.flagSound = true
+		if !Som.flagRunas: 
+			Som.playAudio("Runas")
+			Som.flagRunas = true  #Essa é só uma dica, após tocar uma vez nos próximos ciclos estará disponível desde o começo
 	elif torreVida >= 0:
 		barragem.play("Q3")
+		if !Global.flagBomba:
+			player.arcano.mensagem.show()
+			player.arcano.mensagem.set_text("Vou precisar de mais poder\npara lidar com isso...")
+			await get_tree().create_timer(5).timeout
+			player.arcano.mensagem.hide()
+		Global.flagBomba = true
 	else:
 		barragem.play("Q4")
 		if get_node("StaticBody2D") != null:
@@ -50,20 +54,14 @@ func verificaBarragem():
 		agua = 0
 		Global.score = 0
 		
-		if player.position.x > 200:
-			if player.flagBulletProof:
-				if Global.dificuldade == "Hard":
-					Global.gloriousEvolution = true
-				Global.flagRotaC = true
-			else:		
+		if player.position.x > 190:		
 				if !player.flagArrow:
-					Global.flagGlouriousClicker = true ##Significa que passou sem usar poderes
+					Global.glouriousClicker = true ##Significa que passou sem usar poderes
 				Global.flagRotaA = true
 		
 func verificaDano():
 	if player.sprite.animation == "Hit":
 		torreVida -= 1 #Normalmente é 1
-	print(torreVida)
 
 func criaObjeto():
 	if player.flagBubble == true:
@@ -94,7 +92,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		await get_tree().create_timer(1.5).timeout 
 		torreVida -= 5000
 	else:
-		torreVida -= 20
+		torreVida -= 12
 		area.get_node("..").queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

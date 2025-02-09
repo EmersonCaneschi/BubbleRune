@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6thcgm6qx5la"]
+[gd_scene load_steps=20 format=3 uid="uid://b6thcgm6qx5la"]
 
 [ext_resource type="Script" path="res://alemBarragem.gd" id="1_msyb0"]
 [ext_resource type="PackedScene" uid="uid://b0pvf2lrxkgqs" path="res://fundo.tscn" id="2_b3njp"]
 [ext_resource type="PackedScene" uid="uid://d3sovyw2kpm23" path="res://bubbleman.tscn" id="4_e4nep"]
+[ext_resource type="PackedScene" uid="uid://cn5ra6aowwsaa" path="res://som.tscn" id="4_fq25a"]
 [ext_resource type="Texture2D" uid="uid://bdh30ix82no2l" path="res://Assets/Remake/Pillar_04.png" id="4_j15tu"]
 [ext_resource type="Script" path="res://PlayerLuta.gd" id="5_gj2k8"]
 [ext_resource type="Texture2D" uid="uid://difoniril26cd" path="res://Assets/Remake/Hit_02.png" id="6_e6m03"]
@@ -13,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://tr43hlt2nrjr" path="res://Assets/Remake/Death_03.png" id="11_pwvbc"]
 [ext_resource type="Texture2D" uid="uid://bllx78m1cwc4q" path="res://Assets/Remake/Walk_03.png" id="12_f0wvq"]
 [ext_resource type="Texture2D" uid="uid://bsea3d6snunmw" path="res://Assets/Remake/Walk_02.png" id="13_m4wph"]
-[ext_resource type="Texture2D" uid="uid://bmwio1w2aptid" path="res://Assets/Remake/FadeOut.png" id="15_87tjg"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r0o5m"]
 load_path = "res://.godot/imported/Floor_01.png-8b31a20693e7b64af192e44caa1ac120.ctex"
@@ -75,8 +75,11 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ppyco"]
-radius = 6.5
+radius = 11.5
 height = 40.0
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3ly76"]
+b = Vector2(0, 163)
 
 [node name="alemBarragem" type="Node2D"]
 script = ExtResource("1_msyb0")
@@ -106,9 +109,12 @@ scale = Vector2(1, 1.04)
 texture = ExtResource("4_j15tu")
 flip_h = true
 
+[node name="Bubbleman" parent="Fundo" instance=ExtResource("4_e4nep")]
+position = Vector2(257, 130)
+
 [node name="Mensagem" type="Label" parent="."]
 visible = false
-z_index = 2
+z_index = 1
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -143,17 +149,11 @@ autoplay = "Walk"
 position = Vector2(11.5, 121)
 shape = SubResource("CapsuleShape2D_ppyco")
 
-[node name="Bubbleman" parent="." instance=ExtResource("4_e4nep")]
-position = Vector2(257, 130)
-
-[node name="FadeOut" type="TextureRect" parent="."]
-visible = false
-z_index = 1
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("15_87tjg")
-
 [node name="Timer" type="Timer" parent="."]
-one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Som" parent="." instance=ExtResource("4_fq25a")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_3ly76")

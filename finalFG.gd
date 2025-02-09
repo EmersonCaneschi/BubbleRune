@@ -4,8 +4,10 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	mensagem.position = Vector2( 0 , 30)
 	if Global.flagRotaG:
 		get_node("Fundo/Agua").hide()
+		get_node("Fundo/Background2").hide()
 		finalG()
 	else:
 		finalF()
@@ -16,13 +18,12 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_file("res://menu.tscn")
 	
 	if sprite.animation == "Walk":
-		sprite.position.x -= 0.5
+		sprite.position.x -= 0.51
 	if sprite.position.x < -13:
 		sprite.position.x = 253
 
 func finalF() -> void:
-	mensagem.position = Vector2( 0 , 30)
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(2.5).timeout
 	mensagem.show()
 	mensagem.set_text("Plinio Rocambole nadou e nadou...")
 	await get_tree().create_timer(5).timeout
@@ -34,19 +35,20 @@ func finalF() -> void:
 	mensagem.set_text("Ele esperou que alguém o buscasse...")
 	await get_tree().create_timer(5).timeout
 	mensagem.set_text("Mas ninguém veio.")
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(3).timeout
+	Som.playAudio("FinalRuim")
 	sprite.play("Morreu")
 	await sprite.animation_finished
 	sprite.hide()
 	mensagem.position = Vector2(0, 80)
 	mensagem.add_theme_color_override("font_color", Color(128, 0, 0, 1)) 
 	mensagem.set_text("Final F:\n [F]racassado")
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(4).timeout
 	get_tree().change_scene_to_file("res://menu.tscn")
 	
 func finalG() -> void:
-	mensagem.position = Vector2( 0 , 30)
-	await get_tree().create_timer(2.9).timeout
+	Som.playAudio("Final")
+	await get_tree().create_timer(2.6).timeout
 	mensagem.show()
 	mensagem.set_text("Plinio Rocambole andou e andou...")
 	await get_tree().create_timer(5).timeout
@@ -58,5 +60,5 @@ func finalG() -> void:
 	mensagem.position = Vector2(0, 80)
 	mensagem.add_theme_color_override("font_color", Color(128, 0, 0, 1)) 
 	mensagem.set_text("Final G:\n [G]enial")
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(4).timeout
 	get_tree().change_scene_to_file("res://menu.tscn")

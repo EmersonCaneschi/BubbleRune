@@ -51,8 +51,7 @@ size = Vector2(40.75, 58.5)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tt2h7"]
 
-[node name="Cenario" type="CanvasLayer"]
-layer = -1
+[node name="Cenario" type="Node2D"]
 script = ExtResource("1_eh8ad")
 
 [node name="Fundo" parent="." instance=ExtResource("2_74848")]
@@ -73,8 +72,8 @@ autostart = true
 
 [node name="Barragem" type="AnimatedSprite2D" parent="."]
 z_index = 1
-position = Vector2(219, 83.75)
-scale = Vector2(1, 1.03793)
+position = Vector2(219, 84)
+scale = Vector2(1, 1.04)
 sprite_frames = SubResource("SpriteFrames_6kb4i")
 animation = &"Q4"
 autoplay = "Q1"

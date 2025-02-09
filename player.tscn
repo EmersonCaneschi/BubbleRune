@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ce5knsmtofyww"]
+[gd_scene load_steps=31 format=3 uid="uid://ce5knsmtofyww"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_ypoxr"]
 [ext_resource type="Texture2D" uid="uid://difoniril26cd" path="res://Assets/Remake/Hit_02.png" id="2_ywlgx"]
@@ -27,8 +27,6 @@
 [ext_resource type="Texture2D" uid="uid://ccagyltiuu1nd" path="res://Assets/Remake/Rune_14.png" id="24_opv3a"]
 [ext_resource type="Texture2D" uid="uid://0u2yic8d1w2w" path="res://Assets/Remake/Rune_EX_01.png" id="25_p85nx"]
 [ext_resource type="Texture2D" uid="uid://cejgwsj2syyv2" path="res://Assets/Remake/Rune_EX_02.png" id="26_myd0s"]
-[ext_resource type="AudioStream" uid="uid://dkrsxkhk2tkg4" path="res://Assets/Remake/Som Branco.mp3" id="27_5of3h"]
-[ext_resource type="AudioStream" uid="uid://b647cck7ak18x" path="res://Assets/Remake/Som Preto.mp3" id="28_prg2j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pvtg1"]
 animations = [{
@@ -83,8 +81,9 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iceic"]
-size = Vector2(23, 40)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pmc3h"]
+radius = 11.5
+height = 40.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q6ftd"]
 animations = [{
@@ -244,7 +243,7 @@ autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(11.5, 121)
-shape = SubResource("RectangleShape2D_iceic")
+shape = SubResource("CapsuleShape2D_pmc3h")
 
 [node name="Arcano" type="Node" parent="."]
 script = ExtResource("5_tiwnb")
@@ -258,12 +257,6 @@ animation = &"15"
 
 [node name="Contator" type="Timer" parent="Arcano"]
 
-[node name="Branco" type="AudioStreamPlayer2D" parent="Arcano"]
-stream = ExtResource("27_5of3h")
-
-[node name="Preto" type="AudioStreamPlayer2D" parent="Arcano"]
-stream = ExtResource("28_prg2j")
-
 [node name="ContaSino" type="Timer" parent="Arcano"]
 wait_time = 2.0
 
@@ -276,9 +269,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -120.0
+offset_left = -139.0
 offset_top = 58.0
-offset_right = 96.0
+offset_right = 210.0
 offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2

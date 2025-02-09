@@ -6,11 +6,8 @@ extends Node
 @onready var indicador: TextureRect = $"../../../Maos/Mao Fechada/Indicador"
 @onready var polegar: TextureRect = $"../../../Maos/Mao Fechada/Polegar"
 @onready var runas: AnimatedSprite2D = $Runas
-@onready var branco: AudioStreamPlayer2D = $Branco
-@onready var preto: AudioStreamPlayer2D = $Preto
 @onready var poderes: AnimatedSprite2D = $"../../../Maos/Poderes"
 @onready var contaSino: Timer = $ContaSino
-@onready var som: Node2D = $"../../../Som"
 @onready var mensagem: Label = $Mensagem
 
 var arrow: Array = [2, 3, 2, 4, 3, 1, 2, 3, 2, 5]  # Senha desejada
@@ -23,7 +20,6 @@ var teclaRuna: Array = []
 var musica: bool = false
 var sinoToca: bool = false #Menor para verificar cada siclo
 var silencio: bool = true #Maior para verificar num geral
-
 
 var runasSimbolos: Dictionary = {
 	11: [1, 1],
@@ -53,15 +49,21 @@ var runasSimbolos: Dictionary = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Som.flagMente = 0	
+	mensagem.position = Vector2(0, 25)
+	mensagem.show()
+	mensagem.set_text("Essa barragem parece antiga...")
+	await get_tree().create_timer(3).timeout
+	mensagem.hide()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	runas.position = player.position + Vector2(10, 80)
 	verificaDedo()
-	#if player.flagSound: #Precisa criar uma forma de modulaarizar verificaDedo para não colocar no append se flagSound = false, usar dicionário? Identar os debaixo aqui
-	verificaSenha()
-	runaAparece()
+	if Global.flagSound: #Precisa criar uma forma de modulaarizar verificaDedo para não colocar no append se flagSound = false, usar dicionário? Identar os debaixo aqui
+		verificaSenha()
+		runaAparece()
 
 func verificaDedo() -> void:
 	if Input.is_action_just_pressed("1"):
@@ -92,19 +94,24 @@ func verificaDedo() -> void:
 	
 func verificaSenha() -> void:		
 	var senhaAtual
-	if player.flagArrow == false:
+	if !player.flagArrow:
 		senhaAtual = arrow
-	elif player.flagBomb == false:
+	elif !player.flagBomb and Global.flagBomba:
 		senhaAtual = bomb
-	elif player.flagBubble == false:
-		senhaAtual = bubble
-	elif player.flagBulletProof == false:
+	elif !player.flagBubble and Global.flagRotaA:
+		senhaAtual = bubble	
+		if !Som.flagMente:
+			Som.playAudio("Mente")
+			Som.flagMente = true
+	elif !Global.flagBulletProof and Global.flagRotaB: #Não pode fazer o final C antes de fazer o B
 		senhaAtual = bulletProof
-	else:
-		senhaAtual.clear()
+		if !Som.flagMente:
+			Som.playAudio("Mente")
+			Som.flagMente = true
+	elif senhaAtual != null:
+		senhaAtual = null
 		
 	if teclasPressionadas == senhaAtual and !senhaAtual.is_empty():
-		som.lista(1)
 		if senhaAtual == arrow:
 			poderes.play("Flecha")
 			player.flagArrow = true
@@ -118,12 +125,10 @@ func verificaSenha() -> void:
 			silencio = 1
 		elif senhaAtual == bulletProof:
 			silencio = 1
-			player.flagBulletProof = true
-			player.flagBomb = false
-			player.flagBubble = false
+			Global.flagBulletProof = true
 			poderes.hide()
 	
-	if !senhaAtual.is_empty() and silencio and player.flagSound:
+	if senhaAtual != null and silencio and Global.flagSound:
 		runeSound(senhaAtual)
 		
 func runaAparece():
@@ -168,16 +173,16 @@ func runeSound(senha: Array):
 				break
 			if !sinoToca:
 				if i % 2 == 0:
-					branco.play()
+					Som.playAudio("Branco")
 				else:
-					preto.play()
+					Som.playAudio("Preto")
 				sinoToca = true
 				contaSino.start()  # Timer para controlar o tempo entre toques
 				padrao[i] -= 1
 			await get_tree().create_timer(0.1).timeout  # Pequena pausa para verificar novamente
 		i += 1
 	await get_tree().create_timer(1.5).timeout
-	som.lista(1)
+	Som.playAudio("Sinos")
 	await get_tree().create_timer(10).timeout
 	silencio = true
 
@@ -185,11 +190,12 @@ func _on_conta_sino_timeout() -> void:
 	sinoToca = false
 	
 func help(senha: Array) -> void:
-	mensagem.position = Vector2(20, 25)
 	mensagem.show()
 	if player.flagArrow:
 		mensagem.set_text("Uma nova possibilidade")
 	else:
 		mensagem.set_text("Eu. Ouço. Um. Som.")
+		await get_tree().create_timer(3).timeout
+		mensagem.set_text("Uma mensagem escondida no padrão.")
 	await get_tree().create_timer(3).timeout
 	mensagem.hide()

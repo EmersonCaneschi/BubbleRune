@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1yalr2oai682"]
+
+[ext_resource type="Script" path="res://disparo.gd" id="1_jfvb1"]
+[ext_resource type="Texture2D" uid="uid://diotyhko31we6" path="res://Assets/Remake/Ponto.png" id="1_mkiyk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhq4t"]
+atlas = ExtResource("1_mkiyk")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uqa6w"]
+radius = 1.0
+
+[node name="Disparo" type="Node2D"]
+script = ExtResource("1_jfvb1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_rhq4t")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_uqa6w")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
